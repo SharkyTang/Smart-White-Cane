@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import importlib
 from collections.abc import Iterable
+from math import isfinite
 from typing import Any
 
 from smart_cane.models import Detection
@@ -27,16 +28,21 @@ class YoloDetector:
         *,
         confidence: float = 0.45,
         device: str | int | None = None,
+        image_size: int = 640,
         model: Any | None = None,
     ) -> None:
         if not isinstance(model_name, str) or not model_name.strip():
             raise ValueError("model_name cannot be blank")
-        if not 0.0 <= confidence <= 1.0:
+        if isinstance(confidence, bool) or not isfinite(confidence) or not 0.0 <= confidence <= 1.0:
             raise ValueError("confidence must be between 0 and 1")
+        if isinstance(image_size, bool) or not isinstance(image_size, int) or image_size <= 0:
+            raise ValueError("image_size must be a positive integer")
 
         self.model_name = model_name.strip()
         self.confidence = float(confidence)
-        self.device = device
+        self.requested_device = device
+        self.device = resolve_device(device)
+        self.image_size = image_size
         self._model = model
 
     def _load_model(self) -> Any:
@@ -70,10 +76,10 @@ class YoloDetector:
         options: dict[str, Any] = {
             "source": frame,
             "conf": self.confidence,
+            "imgsz": self.image_size,
             "verbose": False,
+            "device": self.device,
         }
-        if self.device is not None:
-            options["device"] = self.device
 
         try:
             return self.model.predict(**options)
@@ -98,6 +104,11 @@ class YoloDetector:
         # ``raw`` is false above, so this cast-free assertion documents the API.
         assert isinstance(result, list)
         return result
+
+    def warmup(self, frame: Any) -> list[Detection]:
+        """Load the model and run one measured prediction before steady-state work."""
+
+        return self(frame)
 
     def _to_detections(self, raw_results: Any, frame: Any) -> list[Detection]:
         detections: list[Detection] = []
@@ -193,3 +204,43 @@ def _class_name(names: Any, class_id: int) -> str:
     else:
         label = None
     return str(label) if label is not None else f"class_{class_id}"
+
+
+def resolve_device(
+    device: str | int | None,
+    *,
+    torch_module: Any | None = None,
+) -> str | int:
+    """Select a reliable inference device for the Mac-first prototype.
+
+    CPU remains the measured default. Explicit MPS requests fall back to CPU
+    when the installed PyTorch build or current process cannot use MPS.
+    Other explicit Ultralytics device strings are passed through unchanged.
+    """
+
+    if isinstance(device, bool) or not isinstance(device, (str, int, type(None))):
+        raise TypeError("device must be a string, integer index, or None")
+    if isinstance(device, int):
+        if device < 0:
+            raise ValueError("device index cannot be negative")
+        return device
+    if device is None or device.strip().casefold() == "auto":
+        return "cpu"
+
+    normalized = device.strip().casefold()
+    if not normalized:
+        raise ValueError("device cannot be blank")
+    if normalized != "mps":
+        return device.strip()
+
+    if torch_module is None:
+        try:
+            torch_module = importlib.import_module("torch")
+        except ModuleNotFoundError:
+            return "cpu"
+
+    try:
+        available = bool(torch_module.backends.mps.is_available())
+    except (AttributeError, RuntimeError):
+        available = False
+    return "mps" if available else "cpu"

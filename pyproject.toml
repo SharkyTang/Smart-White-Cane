@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "smart-white-cane-lab"
-version = "0.1.0"
+version = "0.2.0"
 description = "A hardware-agnostic learning prototype for accessible obstacle awareness."
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -16,6 +16,11 @@ dependencies = [
 
 [project.scripts]
 smart-cane = "smart_cane.cli:main"
+
+[dependency-groups]
+dev = [
+  "ruff>=0.15,<0.16",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

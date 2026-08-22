@@ -20,6 +20,22 @@ class MutableClock:
         return self.now
 
 
+class ActiveProcess:
+    def __init__(self) -> None:
+        self.terminated = False
+        self.waited = False
+
+    def poll(self) -> None:
+        return None
+
+    def terminate(self) -> None:
+        self.terminated = True
+
+    def wait(self) -> int:
+        self.waited = True
+        return 0
+
+
 class AudioFeedbackTests(unittest.TestCase):
     def test_disabled_feedback_does_not_start_a_process(self) -> None:
         runner = Mock()
@@ -75,6 +91,23 @@ class AudioFeedbackTests(unittest.TestCase):
 
         self.assertTrue(feedback.speak("first"))
         self.assertTrue(feedback.speak("urgent", force=True))
+        self.assertEqual(runner.call_count, 2)
+
+    def test_force_replaces_an_active_lower_priority_message(self) -> None:
+        active = ActiveProcess()
+        runner = Mock(
+            side_effect=[
+                active,
+                subprocess.CompletedProcess([], 0),
+            ]
+        )
+        feedback = AudioFeedback(enabled=True, runner=runner)
+
+        self.assertTrue(feedback.speak("caution"))
+        self.assertTrue(feedback.speak("danger", force=True))
+
+        self.assertTrue(active.terminated)
+        self.assertTrue(active.waited)
         self.assertEqual(runner.call_count, 2)
 
     def test_process_failure_does_not_consume_cooldown(self) -> None:

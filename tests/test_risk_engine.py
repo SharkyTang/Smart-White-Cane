@@ -71,6 +71,20 @@ class RiskEngineTests(unittest.TestCase):
             "right",
         )
 
+    def test_temporal_direction_can_override_raw_box_direction(self) -> None:
+        result = self.engine.assess(
+            detection(bbox=(28, 0, 32, 20)),
+            direction_override="center",
+        )
+
+        self.assertEqual(result.direction, "center")
+        self.assertIn("ahead", result.message)
+        with self.assertRaisesRegex(ValueError, "direction_override"):
+            self.engine.assess(
+                detection(bbox=(28, 0, 32, 20)),
+                direction_override="up",  # type: ignore[arg-type]
+            )
+
     def test_area_thresholds_produce_all_risk_levels(self) -> None:
         low = self.engine.assess(detection(bbox=(40, 0, 60, 20)))
         medium = self.engine.assess(detection(bbox=(30, 0, 70, 40)))
@@ -86,9 +100,7 @@ class RiskEngineTests(unittest.TestCase):
         self.assertEqual(high.message, "Danger: person ahead.")
 
     def test_low_confidence_suppresses_an_otherwise_high_risk_box(self) -> None:
-        result = self.engine.assess(
-            detection(confidence=0.49, bbox=(0, 0, 100, 100))
-        )
+        result = self.engine.assess(detection(confidence=0.49, bbox=(0, 0, 100, 100)))
 
         self.assertEqual(result.level, "low")
         self.assertFalse(result.should_alert)
@@ -97,9 +109,7 @@ class RiskEngineTests(unittest.TestCase):
         engine = RiskEngine(
             RiskRules(
                 default_area_thresholds=AreaThresholds(medium=0.20, high=0.40),
-                per_label_area_thresholds={
-                    "CAR": AreaThresholds(medium=0.05, high=0.10)
-                },
+                per_label_area_thresholds={"CAR": AreaThresholds(medium=0.05, high=0.10)},
             )
         )
 

@@ -29,9 +29,10 @@ class AudioFeedback:
         runner: ``subprocess.Popen`` compatible callable used to execute ``say``.
 
     ``speak`` returns ``True`` when the command launches successfully. Only one
-    speech process can run at a time, so alerts never block the perception loop
-    or form an unbounded queue. Missing executables and launch failures are
-    treated as unavailable feedback rather than crashing the application.
+    speech process can run at a time, so alerts never form an unbounded queue.
+    A forced risk upgrade or direction change replaces the active message.
+    Missing executables and launch failures are treated as unavailable feedback
+    rather than crashing the application.
     """
 
     def __init__(
@@ -84,8 +85,8 @@ class AudioFeedback:
         """Speak ``message`` if enabled and outside the cooldown window.
 
         Arguments are passed as a sequence with ``shell=False``; message text is
-        never interpreted by a shell.  ``force`` bypasses the cooldown but does
-        not bypass the ``enabled`` switch.
+        never interpreted by a shell. ``force`` bypasses the cooldown and
+        replaces an active message, but does not bypass the ``enabled`` switch.
         """
 
         if not isinstance(message, str):
@@ -106,10 +107,20 @@ class AudioFeedback:
         if self._active_process is not None:
             poll = getattr(self._active_process, "poll", None)
             if callable(poll) and poll() is None:
-                return False
+                if not force:
+                    return False
+                terminate = getattr(self._active_process, "terminate", None)
+                if callable(terminate):
+                    try:
+                        terminate()
+                    except OSError:
+                        return False
             wait = getattr(self._active_process, "wait", None)
             if callable(wait):
-                wait()
+                try:
+                    wait()
+                except (OSError, subprocess.SubprocessError):
+                    return False
             self._active_process = None
 
         try:

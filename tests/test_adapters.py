@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import unittest
+from types import SimpleNamespace
 
 from smart_cane.perception.camera import CameraReadError, CameraSource
-from smart_cane.perception.detector import YoloDetector
+from smart_cane.perception.detector import YoloDetector, resolve_device
 
 
 class FakeCapture:
@@ -65,8 +66,10 @@ class FakeModel:
 
     def __init__(self) -> None:
         self.options: dict[str, object] | None = None
+        self.calls = 0
 
     def predict(self, **options: object) -> list[FakeResult]:
+        self.calls += 1
         self.options = options
         return [FakeResult()]
 
@@ -104,6 +107,43 @@ class YoloDetectorTests(unittest.TestCase):
         assert model.options is not None
         self.assertEqual(model.options["conf"], 0.5)
         self.assertEqual(model.options["device"], "cpu")
+        self.assertEqual(model.options["imgsz"], 640)
+
+    def test_warmup_runs_one_prediction_and_returns_detections(self) -> None:
+        model = FakeModel()
+        detector = YoloDetector("fake.pt", model=model, image_size=320)
+
+        detections = detector.warmup(object())
+
+        self.assertEqual(model.calls, 1)
+        self.assertEqual(detections[0].label, "chair")
+        assert model.options is not None
+        self.assertEqual(model.options["imgsz"], 320)
+
+    def test_mps_request_falls_back_to_cpu_when_unavailable(self) -> None:
+        unavailable = SimpleNamespace(
+            backends=SimpleNamespace(
+                mps=SimpleNamespace(is_available=lambda: False),
+            )
+        )
+        available = SimpleNamespace(
+            backends=SimpleNamespace(
+                mps=SimpleNamespace(is_available=lambda: True),
+            )
+        )
+
+        self.assertEqual(resolve_device(None), "cpu")
+        self.assertEqual(resolve_device("auto"), "cpu")
+        self.assertEqual(resolve_device(0), 0)
+        self.assertEqual(resolve_device("0"), "0")
+        self.assertEqual(resolve_device("mps", torch_module=unavailable), "cpu")
+        self.assertEqual(resolve_device("mps", torch_module=available), "mps")
+
+    def test_detector_rejects_boolean_confidence_and_invalid_device_types(self) -> None:
+        with self.assertRaises(ValueError):
+            YoloDetector("fake.pt", confidence=True)
+        with self.assertRaises(TypeError):
+            resolve_device(True)
 
 
 if __name__ == "__main__":

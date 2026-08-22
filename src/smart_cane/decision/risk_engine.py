@@ -104,10 +104,25 @@ class RiskEngine:
     def __init__(self, rules: RiskRules | None = None) -> None:
         self.rules = rules or RiskRules()
 
-    def assess(self, detection: Detection) -> RiskAssessment:
-        """Assess one detection using confidence, position, and visible area."""
+    def assess(
+        self,
+        detection: Detection,
+        *,
+        direction_override: Direction | None = None,
+    ) -> RiskAssessment:
+        """Assess one detection using confidence, position, and visible area.
 
-        direction = self._direction_for(detection)
+        ``direction_override`` lets a temporal tracker supply a direction that
+        has already passed through boundary hysteresis.
+        """
+
+        if direction_override is not None and direction_override not in (
+            "left",
+            "center",
+            "right",
+        ):
+            raise ValueError("direction_override must be left, center, or right")
+        direction = direction_override or self._direction_for(detection)
         area_ratio = detection.area_ratio
         thresholds = self.rules.thresholds_for(detection.label)
 
