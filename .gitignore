@@ -1,0 +1,16 @@
+.DS_Store
+.venv/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Model weights and generated media can be large.
+*.pt
+*.onnx
+artifacts/
+data/raw/
+data/processed/

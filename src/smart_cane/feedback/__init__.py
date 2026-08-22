@@ -1,0 +1,1 @@
+"""Accessible feedback adapters."""
