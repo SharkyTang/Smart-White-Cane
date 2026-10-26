@@ -4,18 +4,19 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "smart-white-cane-lab"
-version = "0.2.0"
+version = "0.4.0"
 description = "A hardware-agnostic learning prototype for accessible obstacle awareness."
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
   "numpy>=1.26,<3",
   "opencv-python>=4.10,<5",
-  "ultralytics>=8.3,<9",
+  "ultralytics>=8.4,<9",
 ]
 
 [project.scripts]
 smart-cane = "smart_cane.cli:main"
+smart-cane-mobile = "smart_cane.mobile_cli:main"
 
 [dependency-groups]
 dev = [
@@ -24,6 +25,9 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"smart_cane.mobile" = ["*.html", "*.js", "*.css"]
 
 [tool.ruff]
 line-length = 100

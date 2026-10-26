@@ -1,6 +1,6 @@
 import unittest
 
-from smart_cane.config import RuntimeConfig, parse_source
+from smart_cane.config import DEFAULT_MODEL, RuntimeConfig, parse_source
 
 
 class RuntimeConfigTests(unittest.TestCase):
@@ -14,6 +14,10 @@ class RuntimeConfigTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             RuntimeConfig(confidence=1.1)
 
+    def test_default_model_is_yolo26_nano(self) -> None:
+        self.assertEqual(DEFAULT_MODEL, "yolo26n.pt")
+        self.assertEqual(RuntimeConfig().model, DEFAULT_MODEL)
+
     def test_milestone_02_defaults_match_the_stability_plan(self) -> None:
         config = RuntimeConfig()
 
@@ -25,6 +29,30 @@ class RuntimeConfigTests(unittest.TestCase):
         self.assertEqual(config.max_missing_frames, 3)
         self.assertEqual(config.direction_hysteresis, 0.05)
         self.assertEqual(config.alert_cooldown_seconds, 3.0)
+
+    def test_lidar_defaults_and_validation(self) -> None:
+        config = RuntimeConfig()
+
+        self.assertEqual(config.distance_high_meters, 1.0)
+        self.assertEqual(config.distance_medium_meters, 2.0)
+        self.assertEqual(config.distance_hysteresis_meters, 0.15)
+        self.assertEqual(config.distance_max_meters, 5.0)
+        self.assertEqual(config.distance_min_samples, 12)
+        self.assertEqual(config.distance_min_valid_ratio, 0.20)
+
+        invalid_configs = (
+            {"distance_high_meters": 0.0},
+            {"distance_high_meters": 2.0, "distance_medium_meters": 1.0},
+            {"distance_medium_meters": 5.0},
+            {"distance_hysteresis_meters": 4.0},
+            {"distance_min_samples": 0},
+            {"distance_min_valid_ratio": 0.0},
+            {"distance_min_valid_ratio": 1.1},
+            {"distance_enter_confirmations": True},
+        )
+        for values in invalid_configs:
+            with self.subTest(values=values), self.assertRaises(ValueError):
+                RuntimeConfig(**values)
 
     def test_invalid_temporal_and_performance_settings_are_rejected(self) -> None:
         invalid_settings = (

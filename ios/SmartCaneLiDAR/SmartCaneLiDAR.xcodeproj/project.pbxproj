@@ -1,0 +1,414 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000001 /* SmartCaneLiDARApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* SmartCaneLiDARApp.swift */; };
+		A10000000000000000000002 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* AppModel.swift */; };
+		A10000000000000000000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000003 /* ContentView.swift */; };
+		A10000000000000000000004 /* ARFrameCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000004 /* ARFrameCaptureService.swift */; };
+		A10000000000000000000005 /* RGBDFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000005 /* RGBDFrame.swift */; };
+		A10000000000000000000006 /* SCF1Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000006 /* SCF1Packet.swift */; };
+		A10000000000000000000007 /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000007 /* APIModels.swift */; };
+		A10000000000000000000008 /* FrameTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000008 /* FrameTransport.swift */; };
+		A10000000000000000000009 /* CoordinateMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000009 /* CoordinateMapper.swift */; };
+		A1000000000000000000000A /* DistanceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000A /* DistanceFormatter.swift */; };
+		A1000000000000000000000B /* SpeechCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000B /* SpeechCoordinator.swift */; };
+		A1000000000000000000000C /* ValidationLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000C /* ValidationLogger.swift */; };
+		B10000000000000000000001 /* SmartCaneLiDARTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000001 /* SmartCaneLiDARTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B30000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C10000000000000000000001;
+			remoteInfo = SmartCaneLiDAR;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A20000000000000000000001 /* SmartCaneLiDARApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCaneLiDARApp.swift; sourceTree = "<group>"; };
+		A20000000000000000000002 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		A20000000000000000000003 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A20000000000000000000004 /* ARFrameCaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFrameCaptureService.swift; sourceTree = "<group>"; };
+		A20000000000000000000005 /* RGBDFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBDFrame.swift; sourceTree = "<group>"; };
+		A20000000000000000000006 /* SCF1Packet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCF1Packet.swift; sourceTree = "<group>"; };
+		A20000000000000000000007 /* APIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModels.swift; sourceTree = "<group>"; };
+		A20000000000000000000008 /* FrameTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTransport.swift; sourceTree = "<group>"; };
+		A20000000000000000000009 /* CoordinateMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateMapper.swift; sourceTree = "<group>"; };
+		A2000000000000000000000A /* DistanceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceFormatter.swift; sourceTree = "<group>"; };
+		A2000000000000000000000B /* SpeechCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechCoordinator.swift; sourceTree = "<group>"; };
+		A2000000000000000000000C /* ValidationLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationLogger.swift; sourceTree = "<group>"; };
+		B20000000000000000000001 /* SmartCaneLiDARTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCaneLiDARTests.swift; sourceTree = "<group>"; };
+		C20000000000000000000001 /* SmartCaneLiDAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartCaneLiDAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C20000000000000000000002 /* SmartCaneLiDARTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartCaneLiDARTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C30000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C30000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C40000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				C40000000000000000000002 /* SmartCaneLiDAR */,
+				C40000000000000000000003 /* SmartCaneLiDARTests */,
+				C40000000000000000000004 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C40000000000000000000002 /* SmartCaneLiDAR */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000001 /* SmartCaneLiDARApp.swift */,
+				A20000000000000000000002 /* AppModel.swift */,
+				A20000000000000000000003 /* ContentView.swift */,
+				A20000000000000000000004 /* ARFrameCaptureService.swift */,
+				A20000000000000000000005 /* RGBDFrame.swift */,
+				A20000000000000000000006 /* SCF1Packet.swift */,
+				A20000000000000000000007 /* APIModels.swift */,
+				A20000000000000000000008 /* FrameTransport.swift */,
+				A20000000000000000000009 /* CoordinateMapper.swift */,
+				A2000000000000000000000A /* DistanceFormatter.swift */,
+				A2000000000000000000000B /* SpeechCoordinator.swift */,
+				A2000000000000000000000C /* ValidationLogger.swift */,
+			);
+			path = SmartCaneLiDAR;
+			sourceTree = "<group>";
+		};
+		C40000000000000000000003 /* SmartCaneLiDARTests */ = {
+			isa = PBXGroup;
+			children = (
+				B20000000000000000000001 /* SmartCaneLiDARTests.swift */,
+			);
+			path = SmartCaneLiDARTests;
+			sourceTree = "<group>";
+		};
+		C40000000000000000000004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C20000000000000000000001 /* SmartCaneLiDAR.app */,
+				C20000000000000000000002 /* SmartCaneLiDARTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C10000000000000000000001 /* SmartCaneLiDAR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C50000000000000000000001 /* Build configuration list for PBXNativeTarget "SmartCaneLiDAR" */;
+			buildPhases = (
+				C60000000000000000000001 /* Sources */,
+				C30000000000000000000001 /* Frameworks */,
+				C70000000000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SmartCaneLiDAR;
+			productName = SmartCaneLiDAR;
+			productReference = C20000000000000000000001 /* SmartCaneLiDAR.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C10000000000000000000002 /* SmartCaneLiDARTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C50000000000000000000002 /* Build configuration list for PBXNativeTarget "SmartCaneLiDARTests" */;
+			buildPhases = (
+				C60000000000000000000002 /* Sources */,
+				C30000000000000000000002 /* Frameworks */,
+				C70000000000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B40000000000000000000001 /* PBXTargetDependency */,
+			);
+			name = SmartCaneLiDARTests;
+			productName = SmartCaneLiDARTests;
+			productReference = C20000000000000000000002 /* SmartCaneLiDARTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C00000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					C10000000000000000000001 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					C10000000000000000000002 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = C10000000000000000000001;
+					};
+				};
+			};
+			buildConfigurationList = C50000000000000000000003 /* Build configuration list for PBXProject "SmartCaneLiDAR" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C40000000000000000000001;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C40000000000000000000004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C10000000000000000000001 /* SmartCaneLiDAR */,
+				C10000000000000000000002 /* SmartCaneLiDARTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C70000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C70000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C60000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000001 /* SmartCaneLiDARApp.swift in Sources */,
+				A10000000000000000000002 /* AppModel.swift in Sources */,
+				A10000000000000000000003 /* ContentView.swift in Sources */,
+				A10000000000000000000004 /* ARFrameCaptureService.swift in Sources */,
+				A10000000000000000000005 /* RGBDFrame.swift in Sources */,
+				A10000000000000000000006 /* SCF1Packet.swift in Sources */,
+				A10000000000000000000007 /* APIModels.swift in Sources */,
+				A10000000000000000000008 /* FrameTransport.swift in Sources */,
+				A10000000000000000000009 /* CoordinateMapper.swift in Sources */,
+				A1000000000000000000000A /* DistanceFormatter.swift in Sources */,
+				A1000000000000000000000B /* SpeechCoordinator.swift in Sources */,
+				A1000000000000000000000C /* ValidationLogger.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C60000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000001 /* SmartCaneLiDARTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B40000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C10000000000000000000001 /* SmartCaneLiDAR */;
+			targetProxy = B30000000000000000000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D10000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BXZVNR3K46;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "读取后置摄像头与 LiDAR 深度，用于室内障碍识别验证。";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "连接同一局域网内的 Mac 运行 YOLO 检测。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoqitang.SmartCaneLiDAR;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D10000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BXZVNR3K46;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "读取后置摄像头与 LiDAR 深度，用于室内障碍识别验证。";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "连接同一局域网内的 Mac 运行 YOLO 检测。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoqitang.SmartCaneLiDAR;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D10000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoqitang.SmartCaneLiDARTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartCaneLiDAR.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SmartCaneLiDAR";
+			};
+			name = Debug;
+		};
+		D10000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoqitang.SmartCaneLiDARTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartCaneLiDAR.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SmartCaneLiDAR";
+			};
+			name = Release;
+		};
+		D10000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D10000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C50000000000000000000001 /* Build configuration list for PBXNativeTarget "SmartCaneLiDAR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D10000000000000000000001 /* Debug */,
+				D10000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C50000000000000000000002 /* Build configuration list for PBXNativeTarget "SmartCaneLiDARTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D10000000000000000000003 /* Debug */,
+				D10000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C50000000000000000000003 /* Build configuration list for PBXProject "SmartCaneLiDAR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D10000000000000000000005 /* Debug */,
+				D10000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C00000000000000000000001 /* Project object */;
+}

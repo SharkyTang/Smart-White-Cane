@@ -12,6 +12,7 @@ from collections.abc import Iterable
 from math import isfinite
 from typing import Any
 
+from smart_cane.config import DEFAULT_MODEL
 from smart_cane.models import Detection
 
 
@@ -24,7 +25,7 @@ class YoloDetector:
 
     def __init__(
         self,
-        model_name: str = "yolo11n.pt",
+        model_name: str = DEFAULT_MODEL,
         *,
         confidence: float = 0.45,
         device: str | int | None = None,

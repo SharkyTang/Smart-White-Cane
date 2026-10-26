@@ -7,6 +7,27 @@ __pycache__/
 .ruff_cache/
 .coverage
 htmlcov/
+.mobile-certs/
+.lidar-validation/
+DerivedData/
+.DerivedData/
+.MacTestDerivedData/
+xcuserdata/
+*.xcuserstate
+*.xcarchive/
+*.ipa
+build/
+dist/
+
+# Local credentials and signing material.
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.key
+*.p12
+*.pfx
+*.mobileprovision
 
 # Model weights and generated media can be large.
 *.pt

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; media-src 'self' blob:; img-src 'self' blob: data:">
+  <title>智能导盲杖手机测试</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <p class="eyebrow">IPHONE 本地测试</p>
+      <h1>障碍识别提醒</h1>
+      <p id="connectionText" class="connection" data-state="idle" role="status" aria-live="polite">尚未开始</p>
+    </header>
+
+    <section class="camera" aria-label="摄像头检测画面">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="overlay" aria-hidden="true"></canvas>
+      <div id="cameraPlaceholder" class="placeholder">点击下方“开始检测”<br>允许使用后置摄像头</div>
+      <div class="camera-topbar">
+        <span id="cameraLabel">后置摄像头</span>
+        <span id="objectCount">0 个目标</span>
+      </div>
+      <div id="alertCard" class="alert-card" data-level="none" aria-live="assertive">
+        <strong id="alertTitle">等待检测</strong>
+        <span id="alertDetail">识别结果将在这里显示</span>
+      </div>
+    </section>
+
+    <section class="directions" aria-label="分方向风险状态">
+      <div class="direction" id="directionLeft" data-level="none"><span>左侧</span><strong>—</strong></div>
+      <div class="direction" id="directionCenter" data-level="none"><span>前方</span><strong>—</strong></div>
+      <div class="direction" id="directionRight" data-level="none"><span>右侧</span><strong>—</strong></div>
+    </section>
+
+    <section class="controls" aria-label="检测控制">
+      <button id="startButton" class="primary" type="button">开始检测</button>
+      <button id="stopButton" type="button" disabled>停止</button>
+      <button id="switchButton" type="button" disabled>切换摄像头</button>
+      <button id="soundButton" type="button">测试声音</button>
+    </section>
+
+    <aside class="notice">
+      <strong>请保持 Safari 在前台，并不要锁屏。</strong>
+      <span>切到后台或锁屏后检测会暂停，返回页面后会尝试自动重新连接。</span>
+    </aside>
+    <p class="privacy">画面只发送到当前局域网内的 Mac 做即时识别；不保存，也不上传云端。</p>
+    <p class="safety">这是学习原型，不能替代导盲杖、人工协助或道路安全判断。</p>
+  </main>
+  <canvas id="captureCanvas" hidden></canvas>
+  <script src="app.js" defer></script>
+</body>
+</html>

@@ -6,7 +6,7 @@ import unittest
 from unittest import mock
 
 from smart_cane.app import RunSummary, evaluate_detections, run_demo, run_live
-from smart_cane.cli import main
+from smart_cane.cli import build_parser, main
 from smart_cane.config import RuntimeConfig
 from smart_cane.decision.risk_engine import RiskEngine
 from smart_cane.decision.temporal_filter import TemporalFilter, TemporalFilterConfig
@@ -93,6 +93,9 @@ class AppTests(unittest.TestCase):
 
         self.assertEqual(result, 0)
         self.assertIn("deterministic demo", output.getvalue())
+
+    def test_desktop_cli_defaults_to_yolo26_nano(self) -> None:
+        self.assertEqual(build_parser().parse_args([]).model, "yolo26n.pt")
 
     def test_run_summary_calculates_fps(self) -> None:
         summary = RunSummary(frames=30, detections=5, alerts=1, elapsed_seconds=2.0)

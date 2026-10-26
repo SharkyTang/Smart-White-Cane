@@ -8,7 +8,7 @@ from collections.abc import Sequence
 
 from smart_cane import __version__
 from smart_cane.app import run_demo, run_live
-from smart_cane.config import RuntimeConfig, parse_source
+from smart_cane.config import DEFAULT_MODEL, RuntimeConfig, parse_source
 from smart_cane.perception.camera import CameraError
 from smart_cane.perception.detector import DetectorError
 
@@ -30,7 +30,11 @@ def build_parser() -> argparse.ArgumentParser:
         metavar="CAMERA_OR_VIDEO",
         help="camera index (default: 0) or video path",
     )
-    parser.add_argument("--model", default="yolo11n.pt", help="YOLO model name or weight path")
+    parser.add_argument(
+        "--model",
+        default=DEFAULT_MODEL,
+        help=f"YOLO model name or weight path (default: {DEFAULT_MODEL})",
+    )
     parser.add_argument(
         "--confidence",
         type=float,

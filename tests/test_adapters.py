@@ -92,6 +92,13 @@ class CameraSourceTests(unittest.TestCase):
             source.read()
 
 
+class YoloDetectorDefaultTests(unittest.TestCase):
+    def test_uses_current_yolo26_nano_model(self) -> None:
+        detector = YoloDetector(model=FakeModel())
+
+        self.assertEqual(detector.model_name, "yolo26n.pt")
+
+
 class YoloDetectorTests(unittest.TestCase):
     def test_translates_model_result_into_domain_detection(self) -> None:
         model = FakeModel()
